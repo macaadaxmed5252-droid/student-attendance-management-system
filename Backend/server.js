@@ -11,6 +11,7 @@ import studentRoutes from './routes/studentRoutes.js';
 import teacherRoutes from './routes/teacherRoutes.js';
 import attendanceRoutes from './routes/attendanceRoutes.js';
 import classRoutes from './routes/classRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
 
 // Configuration definitions initialization
 dotenv.config();
@@ -34,6 +35,7 @@ app.use('/api/students', studentRoutes);
 app.use('/api/teachers', teacherRoutes);
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/classes', classRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // Fallback Route intercept point addressing unmapped request endpoints
 app.use((req, res, next) => {

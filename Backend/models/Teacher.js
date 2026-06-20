@@ -36,6 +36,10 @@ const teacherSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    profilePicture: {
+      type: String,
+      default: '',
+    },
   },
   { timestamps: true }
 );
