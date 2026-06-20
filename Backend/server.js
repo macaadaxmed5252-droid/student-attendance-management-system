@@ -58,6 +58,10 @@ const startServer = async () => {
   await connectDB();
   await ensureAttendanceIndexes();
 
+app.get('/', (req, res) => {
+  res.status(200).json({ message: "Welcome to the Student Attendance Management System API!" });
+});
+
   app.listen(PORT, () => {
     console.log(`Server executing securely in context layer [${process.env.NODE_ENV}] listening across port channel: ${PORT}`);
   });
