@@ -10,4 +10,10 @@ export default defineConfig({
   resolve: {
     dedupe: ['react', 'react-dom', 'react-router-dom'],
   },
+  css: {
+    transformer: 'postcss',
+  },
+  build: {
+    cssMinify: 'esbuild',
+  }
 })
