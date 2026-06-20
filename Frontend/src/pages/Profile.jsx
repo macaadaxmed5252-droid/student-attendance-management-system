@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { FiUser, FiMail, FiShield } from 'react-icons/fi';
+import { FiUser, FiMail, FiShield, FiCamera } from 'react-icons/fi';
 
 const Profile = () => {
   const { user } = useAuth();
+  const [avatar, setAvatar] = useState(null);
+
+  useEffect(() => {
+    if (user?.email) {
+      const savedAvatar = localStorage.getItem(`userAvatar_${user.email}`);
+      if (savedAvatar) setAvatar(savedAvatar);
+    }
+  }, [user]);
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatar(reader.result);
+        localStorage.setItem(`userAvatar_${user.email}`, reader.result);
+        window.dispatchEvent(new Event('storage'));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <div className="max-w-xl mx-auto space-y-6">
@@ -13,8 +34,20 @@ const Profile = () => {
       </div>
 
       <div className="bg-white border border-slate-100 shadow-sm rounded-2xl p-8 text-center space-y-6">
-        <div className="h-24 w-24 bg-gradient-to-tr from-indigo-500 to-blue-600 text-white text-3xl font-black rounded-3xl flex items-center justify-center mx-auto shadow-lg shadow-indigo-500/20">
-          {user?.fullName?.charAt(0).toUpperCase()}
+        <div className="relative mx-auto w-24 h-24">
+          <label htmlFor="avatar-upload" className="cursor-pointer block h-full w-full rounded-3xl overflow-hidden shadow-lg shadow-indigo-500/20 group">
+            {avatar ? (
+              <img src={avatar} alt="Profile" className="h-full w-full object-cover" />
+            ) : (
+              <div className="h-full w-full bg-gradient-to-tr from-indigo-500 to-blue-600 text-white text-3xl font-black flex items-center justify-center">
+                {user?.fullName?.charAt(0).toUpperCase() || <FiUser size={32} />}
+              </div>
+            )}
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <FiCamera className="text-white" size={24} />
+            </div>
+          </label>
+          <input id="avatar-upload" type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
         </div>
 
         <div className="space-y-1">

@@ -13,11 +13,17 @@ const teacherSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    subject: {
+    academicSpecialty: {
       type: String,
       required: true,
       trim: true,
     },
+    assignedClasses: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Class',
+      }
+    ],
     email: {
       type: String,
       required: true,

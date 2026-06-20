@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FiGrid, FiUsers, FiAward, FiCheckSquare, FiPieChart, FiUser, FiLogOut } from 'react-icons/fi';
+import { FiGrid, FiUsers, FiAward, FiCheckSquare, FiPieChart, FiUser, FiLogOut, FiBookOpen } from 'react-icons/fi';
 import { useAuth } from '../../context/AuthContext';
 
 const Sidebar = () => {
@@ -10,6 +10,7 @@ const Sidebar = () => {
     { path: '/dashboard', label: 'Dashboard', icon: FiGrid, roles: ['admin', 'teacher', 'student'] },
     { path: '/students', label: 'Students', icon: FiUsers, roles: ['admin', 'teacher'] },
     { path: '/teachers', label: 'Teachers', icon: FiAward, roles: ['admin'] },
+    { path: '/classes', label: 'Classes', icon: FiBookOpen, roles: ['admin'] },
     { path: '/attendance', label: 'Attendance', icon: FiCheckSquare, roles: ['admin', 'teacher', 'student'] },
     { path: '/reports', label: 'Reports', icon: FiPieChart, roles: ['admin', 'teacher'] },
     { path: '/profile', label: 'My Profile', icon: FiUser, roles: ['admin', 'teacher', 'student'] },

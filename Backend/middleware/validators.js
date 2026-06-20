@@ -64,7 +64,7 @@ export const teacherValidator = [
       if (existingId && req.method === 'POST') throw new Error('Teacher System ID token already exists');
     }),
   body('fullName').trim().notEmpty().withMessage('Full structural name parameter required'),
-  body('subject').trim().notEmpty().withMessage('Academic tracking discipline required'),
+  body('academicSpecialty').trim().notEmpty().withMessage('Academic specialty discipline parameter required'),
   body('email').trim().isEmail().withMessage('Please supply a valid educator email target')
     .custom(async (email, { req }) => {
       const existingEmail = await Teacher.findOne({ email });
@@ -81,6 +81,6 @@ export const attendanceValidator = [
   }),
   body('date').notEmpty().withMessage('Target documentation calendar date parameter required')
     .isISO8601().withMessage('Target schedule tracking timestamp must comply with standard ISO 8601 formatting models'),
-  body('status').isIn(['Present', 'Absent', 'Late']).withMessage('Target tracking validation entry states must match exactly Present, Absent or Late'),
+  body('status').isIn(['Present', 'Absent', 'Excused', 'Late']).withMessage('Target tracking validation entry states must match exactly Present, Absent or Excused'),
   validateResult
 ];

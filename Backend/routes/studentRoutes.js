@@ -7,12 +7,11 @@ import { studentValidator, checkMongoId } from '../middleware/validators.js';
 const router = express.Router();
 
 router.use(protect);
-router.use(authorizeRoles('admin', 'teacher'));
 
-router.post('/', studentValidator, createStudent);
-router.get('/', getAllStudents);
-router.get('/:id', checkMongoId('id'), getStudentById);
-router.put('/:id', [checkMongoId('id'), studentValidator], updateStudent);
-router.delete('/:id', checkMongoId('id'), deleteStudent);
+router.get('/', authorizeRoles('admin', 'teacher'), getAllStudents);
+router.get('/:id', authorizeRoles('admin', 'teacher'), checkMongoId('id'), getStudentById);
+router.post('/', authorizeRoles('admin'), studentValidator, createStudent);
+router.put('/:id', authorizeRoles('admin'), [checkMongoId('id'), studentValidator], updateStudent);
+router.delete('/:id', authorizeRoles('admin'), checkMongoId('id'), deleteStudent);
 
 export default router;

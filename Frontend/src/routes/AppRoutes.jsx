@@ -13,6 +13,7 @@ import AddTeacher from '../pages/Teachers/AddTeacher';
 import EditTeacher from '../pages/Teachers/EditTeacher';
 import Attendance from '../pages/Attendance/Attendance';
 import Reports from '../pages/Reports/Reports';
+import Classes from '../pages/Classes/Classes';
 import Profile from '../pages/Profile';
 import NotFound from '../pages/NotFound';
 
@@ -27,8 +28,11 @@ const AppRoutes = () => {
         
         {/* Student Administration Hierarchy */}
         <Route path="students" element={<ProtectedRoute allowedRoles={['admin', 'teacher']}><Students /></ProtectedRoute>} />
-        <Route path="students/add" element={<ProtectedRoute allowedRoles={['admin', 'teacher']}><AddStudent /></ProtectedRoute>} />
-        <Route path="students/edit/:id" element={<ProtectedRoute allowedRoles={['admin', 'teacher']}><EditStudent /></ProtectedRoute>} />
+        <Route path="students/add" element={<ProtectedRoute allowedRoles={['admin']}><AddStudent /></ProtectedRoute>} />
+        <Route path="students/edit/:id" element={<ProtectedRoute allowedRoles={['admin']}><EditStudent /></ProtectedRoute>} />
+
+        {/* Class Management */}
+        <Route path="classes" element={<ProtectedRoute allowedRoles={['admin']}><Classes /></ProtectedRoute>} />
 
         {/* Teacher Administration Hierarchy */}
         <Route path="teachers" element={<ProtectedRoute allowedRoles={['admin']}><Teachers /></ProtectedRoute>} />

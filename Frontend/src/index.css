@@ -25,3 +25,92 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
+
+@keyframes float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) rotate(4deg);
+  }
+}
+
+@keyframes drift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(var(--start-rotation, 0deg));
+  }
+  50% {
+    transform: translate3d(var(--drift-x, 18px), -22px, 0) rotate(var(--end-rotation, 8deg));
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-float {
+  animation: float 5.5s ease-in-out infinite;
+}
+
+.motion-reveal {
+  animation: reveal-up 0.72s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.login-geo {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+  box-shadow: 0 24px 70px rgba(8, 47, 73, 0.22);
+  backdrop-filter: blur(18px);
+  animation: drift 8s ease-in-out infinite;
+}
+
+.login-geo-one {
+  --start-rotation: 14deg;
+  --end-rotation: 24deg;
+  --drift-x: 24px;
+  top: 13%;
+  right: 11%;
+  width: 8.5rem;
+  height: 8.5rem;
+  border-radius: 1.6rem;
+}
+
+.login-geo-two {
+  --start-rotation: -10deg;
+  --end-rotation: -18deg;
+  --drift-x: -18px;
+  bottom: 16%;
+  left: 10%;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 9999px;
+  animation-delay: 1.2s;
+}
+
+.login-geo-three {
+  --start-rotation: 38deg;
+  --end-rotation: 28deg;
+  --drift-x: 14px;
+  top: 56%;
+  right: 28%;
+  width: 5.5rem;
+  height: 5.5rem;
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  animation-delay: 2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .motion-reveal,
+  .login-geo {
+    animation: none;
+  }
+}
