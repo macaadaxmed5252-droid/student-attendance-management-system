@@ -18,7 +18,14 @@ const app = express();
 
 // Global Network Resource Protocol & Header protection assembly initializations
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: [
+    process.env.ALLOWED_ORIGIN || 'http://localhost:5173',
+    'http://localhost:5173',
+    'http://localhost:3000',
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 
 // Application API routes mapping definitions
