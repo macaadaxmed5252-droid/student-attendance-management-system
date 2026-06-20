@@ -37,6 +37,10 @@ app.use('/api/attendance', attendanceRoutes);
 app.use('/api/classes', classRoutes);
 app.use('/api/upload', uploadRoutes);
 
+app.get('/', (req, res) => {
+  res.status(200).json({ message: "Welcome to the Student Attendance Management System API!" });
+});
+
 // Fallback Route intercept point addressing unmapped request endpoints
 app.use((req, res, next) => {
   res.status(404).json({ message: `Resource context route targeting path not identified: ${req.originalUrl}` });
@@ -57,10 +61,6 @@ const startServer = async () => {
   // Establish state connectivity configurations to database engine target endpoint structures
   await connectDB();
   await ensureAttendanceIndexes();
-
-app.get('/', (req, res) => {
-  res.status(200).json({ message: "Welcome to the Student Attendance Management System API!" });
-});
 
   app.listen(PORT, () => {
     console.log(`Server executing securely in context layer [${process.env.NODE_ENV}] listening across port channel: ${PORT}`);
